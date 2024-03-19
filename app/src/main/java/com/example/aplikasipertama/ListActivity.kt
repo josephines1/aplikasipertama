@@ -39,6 +39,7 @@ class ListActivity : AppCompatActivity() {
         )
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv_students)
+
         recyclerView.adapter = ListAdapter(students)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
