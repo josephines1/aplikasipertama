@@ -1,6 +1,8 @@
 package com.example.aplikasipertama
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -27,5 +29,20 @@ class DetailActivity : AppCompatActivity() {
 
         tvName.text = student?.name
         tvMajor.text = student?.major
+
+        val btnEdit = findViewById<Button>(R.id.btn_edit)
+
+        // Handle klik tombol Edit
+        btnEdit.setOnClickListener {
+
+            // Buat Intent untuk membuka EditActivity
+            val intent = Intent(this, EditActivity::class.java)
+
+            // Sertakan data siswa yang ingin diedit ke dalam intent
+            intent.putExtra("STUDENT", student)
+
+            // Mulai EditActivity
+            startActivity(intent)
+        }
     }
 }

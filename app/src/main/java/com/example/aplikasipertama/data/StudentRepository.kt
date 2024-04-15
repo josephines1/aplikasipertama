@@ -36,7 +36,7 @@ class StudentRepository(
         }
     }
 
-    suspend fun update(student: Student): LiveData<Resource<Unit>> = liveData {
+    suspend fun update(student: Student): Flow<Resource<Unit>> = flow {
         emit(Resource.Loading)
         try {
             studentDao.update(student.toEntity())
