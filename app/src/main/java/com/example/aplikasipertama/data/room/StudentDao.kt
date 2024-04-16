@@ -17,10 +17,10 @@ interface StudentDao {
     @Query("select * from students")
     fun getStudents(): List<StudentEntity>
 
-    @Query("SELECT * FROM students WHERE name LIKE :name")
+    @Query("SELECT * FROM students WHERE name = :name")
     fun getStudentByName(name: String): List<StudentEntity>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update
     suspend fun update(student: StudentEntity)
 
     @Delete

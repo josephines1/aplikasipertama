@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplikasipertama.model.Student
@@ -20,6 +21,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ListActivity : AppCompatActivity() {
 
     private val listViewModel: ListViewModel by viewModel()
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
@@ -52,17 +55,16 @@ class ListActivity : AppCompatActivity() {
             )
         )
 
-        val recyclerView = findViewById<RecyclerView>(R.id.rv_students)
-//        recyclerView.adapter = ListAdapter(this, students)
-        listViewModel.getStudents().observe(this) {
-            when (it) {
-                is Resource.Success -> {
-                    recyclerView.adapter = ListAdapter(this, it.data)
-                }
-                is Resource.Error -> {}
-                Resource.Loading -> {}
-            }
+        val listAdapter = ListAdapter()
+        listViewModel.getStudents()
+        listViewModel.students.observe(this) {
+            listAdapter.setListStudents(it)
         }
+
+        recyclerView = findViewById(R.id.rv_students)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = listAdapter
+
         listViewModel.layoutState.observe(this) { layout ->
             when (layout) {
                 LayoutState.LINEAR -> {
@@ -81,7 +83,23 @@ class ListActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        recyclerView.setHasFixedSize(true)
+        val itemTouchHelperCallback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val student = (viewHolder as ListAdapter.ViewHolder).getStudent()
+                listViewModel.delete(student)
+            }
+
+        }
+        ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -95,5 +113,10 @@ class ListActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        listViewModel.getStudents()
     }
 }

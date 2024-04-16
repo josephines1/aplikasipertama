@@ -25,15 +25,9 @@ class StudentRepository(
         }
     }
 
-    fun getStudents(): LiveData<Resource<List<Student>>> = liveData {
-        emit(Resource.Loading)
-        try {
-            val students = studentDao.getStudents().map { it.toModel() }
-            emit(Resource.Success(students))
-        } catch (e: Error) {
-            Log.e("StudentRepository: getStudents", e.toString())
-            emit(Resource.Error(e.toString()))
-        }
+    fun getStudents(): Flow<List<Student>> = flow {
+        val students = studentDao.getStudents().map { it.toModel() }
+        emit(students)
     }
 
     suspend fun update(student: Student): Flow<Resource<Unit>> = flow {
@@ -47,7 +41,7 @@ class StudentRepository(
         }
     }
 
-    suspend fun delete(student: Student): LiveData<Resource<Unit>> = liveData {
+    suspend fun delete(student: Student): Flow<Resource<Unit>> = flow {
         emit(Resource.Loading)
         try {
             studentDao.delete(student.toEntity())
