@@ -10,6 +10,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.aplikasipertama.model.Student
 
 class DetailActivity : AppCompatActivity() {
+
+    private var student: Student? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
@@ -22,7 +25,9 @@ class DetailActivity : AppCompatActivity() {
 
 //        val name = intent.getStringExtra("NAME")
 //        val major = intent.getStringExtra("MAJOR")
-        val student: Student? = intent.getParcelableExtra("STUDENT")
+//        val student: Student? = intent.getParcelableExtra("STUDENT")
+
+        student = intent.getParcelableExtra("STUDENT")
 
         val tvName = findViewById<TextView>(R.id.tv_detail_name)
         val tvMajor = findViewById<TextView>(R.id.tv_detail_major)
@@ -36,7 +41,7 @@ class DetailActivity : AppCompatActivity() {
         btnEdit.setOnClickListener {
 
             // Buat Intent untuk membuka EditActivity
-            val intent = Intent(this, EditActivity::class.java)
+            val intent = Intent(this, UpdateActivity::class.java)
 
             // Sertakan data siswa yang ingin diedit ke dalam intent
             intent.putExtra("STUDENT", student)

@@ -5,15 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".EditActivity">
+    tools:context=".UpdateActivity">
 
-    <TextView
-        android:id="@+id/tv_name"
+    <EditText
+        android:id="@+id/et_edit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:textSize="24dp"
-        android:textStyle="bold"
         android:hint="Name" />
 
     <EditText
