@@ -16,6 +16,8 @@ ksp = "1.9.0-1.0.13"
 
 koin-bom = "3.5.3"
 room = "2.6.1"
+googleServices = "4.4.1"
+firebaseFirestore = "24.11.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +42,8 @@ koin-android = { module = "io.insert-koin:koin-android" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version = "room" }
+google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

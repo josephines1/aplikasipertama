@@ -1,6 +1,7 @@
 package com.example.aplikasipertama
 
 import android.app.Application
+import com.example.aplikasipertama.di.firebaseModule
 import com.example.aplikasipertama.di.repositoryModule
 import com.example.aplikasipertama.di.roomModule
 import com.example.aplikasipertama.di.viewModelModule
@@ -17,7 +18,8 @@ class App : Application() {
             modules(listOf(
                 viewModelModule,
                 repositoryModule,
-                roomModule
+                roomModule,
+                firebaseModule
             ))
         }
     }

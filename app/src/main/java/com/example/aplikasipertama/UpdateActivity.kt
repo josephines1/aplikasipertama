@@ -38,7 +38,7 @@ class UpdateActivity : AppCompatActivity() {
         // Ketika tombol Simpan
         btnSave.setOnClickListener {
             val studentInput = Student(
-                id = student?.id?.or(0),
+                id = student?.id,
                 name = etName.text.ifEmpty { "" }. toString(),
                 major = etMajor.text.ifEmpty { "" }.toString()
             )

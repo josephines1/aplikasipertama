@@ -1,7 +1,7 @@
 package com.example.aplikasipertama
 
-import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,14 +40,16 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
         fun getStudent() = student
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_view, parent, false)
 
         return ViewHolder(view);
     }
 
-    override fun onBindViewHolder(holder: ListAdapter.ViewHolder, position: Int) {
+    override fun getItemCount() = students.size
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = students[position]
 
         holder.bind(item)
@@ -59,8 +61,6 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
             it.context.startActivity(intent)
         }
     }
-
-    override fun getItemCount() = students.size
 }
 
 class StudentDiffCallback(private val oldStudents: List<Student>, private val newStudents: List<Student>) : DiffUtil.Callback() {
