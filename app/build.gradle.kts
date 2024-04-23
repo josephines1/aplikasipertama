@@ -33,6 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -60,6 +63,7 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
 
-//    implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation(libs.glide)
+
+    implementation("androidx.paging:paging-runtime-ktx:3.1.0")
 }

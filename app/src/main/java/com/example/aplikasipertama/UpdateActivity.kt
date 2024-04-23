@@ -46,9 +46,9 @@ class UpdateActivity : AppCompatActivity() {
         }
         updateViewModel.studentUpdated.observe(this) {
             if (it) {
-//                finish()
                 val intent = Intent(this, ListActivity::class.java)
                 startActivity(intent)
+//                finish()
             }
         }
     }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "222238849934",
+    "project_id": "aplikasipertama-72321",
+    "storage_bucket": "aplikasipertama-72321.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222238849934:android:f329ae6bd244b676a5c2df",
+        "android_client_info": {
+          "package_name": "com.example.aplikasipertama"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo55gUsle7fE_c2m2JmmXIi1Y8Sl-JA_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

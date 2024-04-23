@@ -36,9 +36,9 @@ class AddActivity : AppCompatActivity() {
         }
         addViewModel.studentAdded.observe(this) {
             if (it) {
-//                finish()
                 val intent = Intent(this, ListActivity::class.java)
                 startActivity(intent)
+//                finish()
             }
         }
     }

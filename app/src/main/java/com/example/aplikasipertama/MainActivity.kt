@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         buttonNext.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
             startActivity(intent)
-            finish()
+//            finish()
         }
     }
 }

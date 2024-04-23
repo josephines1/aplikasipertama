@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.aplikasipertama.model.Student
 import com.example.aplikasipertama.utils.Resource
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : AppCompatActivity() {
@@ -57,15 +59,20 @@ class ListActivity : AppCompatActivity() {
         )
 
         val listAdapter = ListAdapter()
-        listViewModel.getStudents()
-        listViewModel.students.observe(this) {
-            Log.d("ListActivity", it.toString())
-            listAdapter.setListStudents(it)
-        }
 
         recyclerView = findViewById(R.id.rv_students)
-        recyclerView.setHasFixedSize(true)
         recyclerView.adapter = listAdapter
+
+        listViewModel.getStudents()
+        listViewModel.getStudents().observe(this) {
+            Log.d("ListActivity", it.toString())
+            listAdapter.submitData(lifecycle, it)
+        }
+
+        val loadingStateAdapter = LoadingStateAdapter { listAdapter.retry() }
+        recyclerView.adapter = listAdapter.withLoadStateFooter(
+            footer = loadingStateAdapter
+        )
 
         listViewModel.layoutState.observe(this) { layout ->
             when (layout) {

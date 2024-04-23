@@ -15,5 +15,5 @@ val viewModelModule = module {
 }
 
 val repositoryModule = module {
-    single<StudentRepository> { StudentRepository(get(), get()) }
+    single<StudentRepository> { StudentRepository(get())}
 }
